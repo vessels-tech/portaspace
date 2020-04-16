@@ -17,9 +17,12 @@ apt update \
   && chmod +x /usr/local/bin/docker-compose
 
 
+#turns out that changing this script forces replacement... damn
 
 # Dynamic Setup Script
 
+# TODO: we can't clone any repos with ssh until the ssh key is in here! Maybe we need to set up the key in userdata.sh
+# TODO: this runs as root I think. so we need to be careful about permissions
 curl -s https://raw.githubusercontent.com/vessels-tech/portaspace/master/src/setup_portaspace.sh | bash
 
 

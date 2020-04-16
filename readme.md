@@ -21,18 +21,25 @@ terraform apply
 #TODO: figure out how configure public ips and ssh
 
 # wait until DNS has propagated
+sed '/^portaspace.mojaloop/d' ~/.ssh/known_hosts > ~/.ssh/known_hosts
 scp  ~/.ssh/id_rsa ubuntu@portaspace.mojaloop.live:~/.ssh/id_rsa
+
 ssh ubuntu@portaspace.mojaloop.live
 
 # TODO: do this only once... or dynamically
-echo 'Host portaspace
+echo '
+Host portaspace
     HostName portaspace.mojaloop.live
     User ubuntu
     IdentityFile ~/.ssh/id_rsa' >> ~/.ssh/config
 
+#TODO - figure out ~/.ssh/known_hosts file... when the IP changes this file changes
+cat ~/.ssh/known_hosts | grep portaspace
+
 
 # open up vscode?
-
+vscode
+SHIFT + CMD + P > "ssh" > Select "Remote-SSH Connect to Host..." > Select "portaspace"
 ```
 
 

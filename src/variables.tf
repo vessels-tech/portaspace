@@ -7,7 +7,8 @@ variable "instance_type" {
 variable "whitelist_ips" {
   type = list(string)
   default = [
-    "175.176.71.0/24"
+    "175.176.71.0/24",
+    "110.54.219.0/24"
     # TODO: add huawei and essential IP as well
   ]
 }
