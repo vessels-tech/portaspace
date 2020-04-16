@@ -16,6 +16,10 @@ apt update \
             -o /usr/local/bin/docker-compose \
   && chmod +x /usr/local/bin/docker-compose
 
+groupadd docker 
+usermod -aG docker ubuntu 
+# reboot
+
 
 #turns out that changing this script forces replacement... damn
 
@@ -26,5 +30,5 @@ apt update \
 # curl -s https://raw.githubusercontent.com/vessels-tech/portaspace/master/src/setup_portaspace.sh | bash
 
 
-echo 'DONE' >> /tmp/userdata_done
+echo 'DONE' >> /tmp/userdata_status
 

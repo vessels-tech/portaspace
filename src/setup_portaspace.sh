@@ -36,7 +36,7 @@ fi
 
 
 #TODO:
-#docker config?
+#docker user config?, this requires a restart...
 
 # Install K3s, Helm3
 if ! [ -x "$(command -v k3s)" ]; then 
@@ -44,14 +44,14 @@ if ! [ -x "$(command -v k3s)" ]; then
   curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s -
 fi
 
-k3s kubectl get node || echo 'k3s install failed' && exit 1
+k3s kubectl get node || echo '[WARN] k3s install failed'
 
 if ! [ -x "$(command -v helm)" ]; then 
   echo 'Installing helm'
   curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 fi
 
-helm version || echo 'Helm install failed' && exit 1
+helm version || echo '[WARN] Helm install failed'
 
 
 rm -rf ${TMP_DIR}

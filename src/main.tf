@@ -48,6 +48,13 @@ resource "aws_instance" "portaspace" {
 
   # TODO: Work on this script... make it bulletproof!
   user_data = file("${path.module}/userdata.sh")
+
+  root_block_device {
+    # size in GB
+    volume_size = 150
+    delete_on_termination = true
+
+  }
 }
 
 resource "aws_security_group" "whitelist_traffic" {
@@ -60,7 +67,6 @@ resource "aws_security_group" "whitelist_traffic" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-
     cidr_blocks = var.whitelist_ips
   }
 
@@ -85,15 +91,6 @@ resource "aws_route53_record" "base" {
     aws_instance.portaspace.public_ip
   ]
 }
-
-# resource "aws_route53_record" "wild" {
-#   zone_id = "${var.route_53_zone_id}"
-#   name    = "${var.record_name_wild}"
-#   type    = "A"
-#   ttl     = "300"
-#   records = ["${var.lb_public_ip}"]
-# }
-
 
 /* Outputs */
 

@@ -29,10 +29,11 @@ scp  ~/.ssh/id_rsa ubuntu@portaspace.mojaloop.live:~/.ssh/id_rsa
 ssh ubuntu@portaspace.mojaloop.live
 
 # run the setup script
-curl -s https://raw.githubusercontent.com/vessels-tech/portaspace/master/src/setup_portaspace.sh | bash
+# curl -s https://raw.githubusercontent.com/vessels-tech/portaspace/master/src/setup_portaspace.sh | bash
+git clone git@github.com:vessels-tech/portaspace.git && chmod 755 ./portaspace/src/setup_portaspace.sh && ./portaspace/src/setup_portaspace.sh
 
 # update the ssh config
-if [ $(cat ~/.ssh/config | grep 'alias gs' | wc -l) -eq 0 ]; then
+if [ $(cat ~/.ssh/config | grep 'Host portaspace' | wc -l) -eq 0 ]; then
   echo '
 Host portaspace
     HostName portaspace.mojaloop.live
