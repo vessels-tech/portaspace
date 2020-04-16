@@ -16,10 +16,11 @@ aws-mfa
 
 cd src
 terraform plan
-terraform apply?
+terraform apply
 
 #TODO: figure out how configure public ips and ssh
 
+# wait until DNS has propagated
 scp  ~/.ssh/id_rsa ubuntu@portaspace.mojaloop.live:~/.ssh/id_rsa
 ssh ubuntu@portaspace.mojaloop.live
 
