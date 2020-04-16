@@ -7,37 +7,41 @@ Useful when the internet is bad, or we need extra performance.
 ## Config
 
 
-## Steps
+## Up and Running
 
 ```bash
 
 #sign in with 2fa to command line
 aws-mfa 
 
+# deploy the infrastructure
 cd src
 terraform plan
 terraform apply
 
-#TODO: figure out how configure public ips and ssh
-
-# wait until DNS has propagated
+# make sure the old portaspace isn't still in our known_hosts
 sed '/^portaspace.mojaloop/d' ~/.ssh/known_hosts > ~/.ssh/known_hosts
+
+# copy in our key
 scp  ~/.ssh/id_rsa ubuntu@portaspace.mojaloop.live:~/.ssh/id_rsa
 
+# ssh in
 ssh ubuntu@portaspace.mojaloop.live
 
-# TODO: do this only once... or dynamically
-echo '
+# run the setup script
+curl -s https://raw.githubusercontent.com/vessels-tech/portaspace/master/src/setup_portaspace.sh | bash
+
+# update the ssh config
+if [ $(cat ~/.ssh/config | grep 'alias gs' | wc -l) -eq 0 ]; then
+  echo '
 Host portaspace
     HostName portaspace.mojaloop.live
     User ubuntu
     IdentityFile ~/.ssh/id_rsa' >> ~/.ssh/config
-
-#TODO - figure out ~/.ssh/known_hosts file... when the IP changes this file changes
-cat ~/.ssh/known_hosts | grep portaspace
+fi
 
 
-# open up vscode?
+# From vscode, open a new session
 vscode
 SHIFT + CMD + P > "ssh" > Select "Remote-SSH Connect to Host..." > Select "portaspace"
 ```
