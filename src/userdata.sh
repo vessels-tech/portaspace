@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo 'HELLO WORLD' > /tmp/userdata_start
+echo 'starting...' >> /tmp/userdata_status
 
 # Software Updates
 
@@ -18,6 +18,10 @@ apt update \
 
 
 
+# Dynamic Setup Script
 
-echo 'DONE' > /tmp/userdata_done
+curl -s https://raw.githubusercontent.com/vessels-tech/portaspace/master/src/setup_portaspace.sh | bash
+
+
+echo 'DONE' >> /tmp/userdata_done
 

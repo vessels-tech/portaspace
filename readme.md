@@ -20,7 +20,17 @@ terraform apply?
 
 #TODO: figure out how configure public ips and ssh
 
+scp  ~/.ssh/id_rsa ubuntu@portaspace.mojaloop.live:~/.ssh/id_rsa
 ssh ubuntu@portaspace.mojaloop.live
+
+# TODO: do this only once... or dynamically
+echo 'Host portaspace
+    HostName portaspace.mojaloop.live
+    User ubuntu
+    IdentityFile ~/.ssh/id_rsa' >> ~/.ssh/config
+
+
+# open up vscode?
 
 ```
 
