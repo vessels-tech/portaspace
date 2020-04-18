@@ -24,6 +24,7 @@ plan: check-mfa
 apply: check-mfa
 	cd ${TF_DIR} && terraform apply
 
+# TODO: implement pause and restart instance!
 pause: check-mfa
 	@echo 'Not implemented'
 
@@ -46,12 +47,11 @@ setup:
 	# ssh ubuntu@portaspace.mojaloop.live "git clone git@github.com:vessels-tech/portaspace.git && chmod 755 ./portaspace/src/setup_portaspace.sh && ./portaspace/src/setup_portaspace.sh"
 	ssh ubuntu@portaspace.mojaloop.live "curl -s https://raw.githubusercontent.com/vessels-tech/portaspace/master/src/setup_portaspace.sh | bash"
 
+	# Make sure our ~/.ssh/config file is configured for this environment
 	./scripts/_setup_ssh_config.sh
 
 
-
-
-
-
+ssh:
+	ssh ubuntu@portaspace.mojaloop.live
 
 .PHONY: help

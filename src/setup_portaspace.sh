@@ -22,6 +22,9 @@ cd ${WORKDIR}
 git clone git@github.com:vessels-tech/helm.git
 cd helm && git remote add mojaloop git@github.com:mojaloop/helm.git
 
+cd ${WORKDIR}
+git clone git@github.com:vessels-tech/moja-bench.git
+
 git config --global user.name "lewisdaly"
 git config --global user.email "lewis@vesselstech.com"
 
