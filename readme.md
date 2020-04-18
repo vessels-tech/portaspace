@@ -10,14 +10,26 @@ Useful when the internet is bad, or we need extra performance.
 ## Up and Running
 
 ```bash
+# see what will be applied
+make plan
 
-#sign in with 2fa to command line
-aws-mfa 
+# deploy
+make apply
 
-# deploy the infrastructure
-cd src
-terraform plan
-terraform apply
+# after deploying, run the setup scripts
+make setup
+
+# pause (stops the EC2 instance)
+make pause
+
+# destroy
+make destroy
+
+```
+
+
+Some underlying scripts
+```bash
 
 # make sure the old portaspace isn't still in our known_hosts
 sed '/^portaspace.mojaloop/d' ~/.ssh/known_hosts > ~/.ssh/known_hosts
