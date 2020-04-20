@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
 
+##
+# userdata runs on the start of the instance
+# It has root permission, so be careful!
+##
+
 echo 'starting...' >> /tmp/userdata_status
 
 # Software Updates
-
 apt update \
-  && apt install apt-transport-https ca-certificates curl software-properties-common -y \
+  && apt install apt-transport-https ca-certificates curl software-properties-common fish -y \
   && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - \
   && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable" \
   && apt update \
@@ -16,9 +20,11 @@ apt update \
             -o /usr/local/bin/docker-compose \
   && chmod +x /usr/local/bin/docker-compose
 
+
+# Setup docker user 
 groupadd docker 
 usermod -aG docker ubuntu 
-# reboot
+
 
 
 #turns out that changing this script forces replacement... damn

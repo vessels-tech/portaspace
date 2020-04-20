@@ -12,7 +12,7 @@ mkdir -p ${TMP_DIR}
 
 # Repo and git setup
 ssh-keyscan github.com >> ${TMP_DIR}/githubKey
-cat /tmp/githubKey >> ~/.ssh/known_hosts
+cat ${TMP_DIR}/githubKey >> ~/.ssh/known_hosts
 
 cd ${WORKDIR}
 git clone git@github.com:vessels-tech/central-ledger.git
@@ -21,6 +21,10 @@ cd central-ledger && git remote add mojaloop git@github.com:mojaloop/central-led
 cd ${WORKDIR}
 git clone git@github.com:vessels-tech/helm.git
 cd helm && git remote add mojaloop git@github.com:mojaloop/helm.git
+
+cd ${WORKDIR}
+git clone git@github.com:vessels-tech/postman.git
+cd helm && git remote add mojaloop git@github.com:mojaloop/postman.git
 
 cd ${WORKDIR}
 git clone git@github.com:vessels-tech/moja-bench.git
@@ -38,9 +42,6 @@ if [ $(cat ~/.bashrc | grep 'alias gp' | wc -l) -eq 0 ]; then
 fi
 
 
-#TODO:
-#docker user config?, this requires a restart...
-
 # Install K3s, Helm3
 if ! [ -x "$(command -v k3s)" ]; then 
   echo 'Installing k3s'
@@ -55,6 +56,28 @@ if ! [ -x "$(command -v helm)" ]; then
 fi
 
 helm version || echo '[WARN] Helm install failed'
+
+
+if ! [ -x "$(command -v nvm)" ]; then
+  echo 'installing nvm'
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \.   "$NVM_DIR/bash_completion"
+  # TODO: configure with fish...
+  nvm install v12
+fi
+
+nvm --version || echo '[WARN] nvm install failed'
+
+
+# TODO:
+# Add below options to ~/.byobu/.tmux.conf:
+# set -g mouse on
+
+
+# Install node tools
+npm install -g newman
 
 
 rm -rf ${TMP_DIR}
