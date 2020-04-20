@@ -38,7 +38,8 @@ destroy: check-mfa
 
 setup:
 	# make sure the old portaspace isn't still in our known_hosts
-	sed '/^portaspace.mojaloop/d' ~/.ssh/known_hosts > ~/.ssh/known_hosts
+	sed '/^portaspace.mojaloop/d' ~/.ssh/known_hosts > /tmp/known_hosts
+	cat /tmp/known_hosts > ~/.ssh/known_hosts
 
 	# copy in our key
 	scp  ~/.ssh/id_rsa ubuntu@portaspace.mojaloop.live:~/.ssh/id_rsa

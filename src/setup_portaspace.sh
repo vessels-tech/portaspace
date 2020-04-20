@@ -27,6 +27,9 @@ git clone git@github.com:vessels-tech/postman.git
 cd helm && git remote add mojaloop git@github.com:mojaloop/postman.git
 
 cd ${WORKDIR}
+git clone git@github.com:tdaly61/laptop-mojo.git
+
+cd ${WORKDIR}
 git clone git@github.com:vessels-tech/moja-bench.git
 
 git config --global user.name "lewisdaly"
