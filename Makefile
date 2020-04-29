@@ -24,9 +24,14 @@ plan: check-mfa
 apply: check-mfa
 	cd ${TF_DIR} && terraform apply
 
+outputs: check-mfa
+	cd ${TF_DIR} && terraform output
+
 # TODO: implement pause and restart instance!
 pause: check-mfa
-	@echo 'Not implemented'
+	# INSTANCE_ID = $(shell ./scripts/_instance_id.sh)
+	# echo ${INSTANCE_ID}
+	aws ec2 stop-instances --instance-ids $(shell ./scripts/_instance_id.sh) --hibernate --dry-run
 
 destroy: check-mfa
 	cd ${TF_DIR} && terraform destroy

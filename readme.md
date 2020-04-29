@@ -140,7 +140,10 @@ fn + F7 for scrollback mode
 
 
 ## Outstanding issues:
-- scrolling back is really hard in byobu
+- Stopping/starting an instance
+  - we lose the public IP address in AWS, so then need to update the DNS records...
+- scrolling back is really hard in byobu 
+  - fixed, although now we need a way to switch in and out of cursor mode
 - option + arrows to get around words not working
 - not enough space by default...
 - networking (e.g. downloading docker images) still kinda slow...

@@ -31,6 +31,7 @@ resource "aws_key_pair" "portaspace_key" {
   public_key = file("/Users/ldaly/.ssh/id_rsa.pub")
 }
 
+//TODO: enable hibernation!
 resource "aws_instance" "portaspace" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
@@ -93,6 +94,10 @@ resource "aws_route53_record" "base" {
 }
 
 /* Outputs */
+
+output "instance_id" {
+  value = aws_instance.portaspace.id
+}
 
 output "public_ip" {
   value = aws_instance.portaspace.public_ip

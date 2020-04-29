@@ -24,7 +24,7 @@ cd helm && git remote add mojaloop git@github.com:mojaloop/helm.git
 
 cd ${WORKDIR}
 git clone git@github.com:vessels-tech/postman.git
-cd helm && git remote add mojaloop git@github.com:mojaloop/postman.git
+cd postman && git remote add mojaloop git@github.com:mojaloop/postman.git
 
 cd ${WORKDIR}
 git clone git@github.com:tdaly61/laptop-mojo.git
@@ -77,6 +77,9 @@ nvm --version || echo '[WARN] nvm install failed'
 # TODO:
 # Add below options to ~/.byobu/.tmux.conf:
 # set -g mouse on
+
+echo 'set -g mouse on
+' >> ~/.byobu/.tmux.conf
 
 
 # Install node tools
